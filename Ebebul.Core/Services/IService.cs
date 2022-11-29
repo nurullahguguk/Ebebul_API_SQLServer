@@ -18,8 +18,8 @@ namespace Ebebul.Core.Services
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         //AddAsync ve AddRangeAsync methodları servis tarafında çalıştığı database'e veri ekleyecek. Bu sebeple eklenen verilerin id'sini görebilmek adına geriye değer döndürüyoruz.
 
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entities);
+        Task<T> AddAsync(T entity);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
         //=>EF Core da Update ve Delete için asenkron olan yapısı yoktur.Entity'i zaten EF Core takip ediyor, Update metoduna geldiğinde State'ini Modify yapıyor. Yani uzun süren bir işlem olmadığı için asenkronu yoktur.
 
         //Update ve Remove u niye asenkron yaptık veritabanına değişikliklerin yansıması için SaveChangeAsync kullanacağımız için asenkron tanımladık.
