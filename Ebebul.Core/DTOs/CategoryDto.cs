@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ebebul.Core.DTOs
 {
-    internal class CategoryDto
+    public class CategoryDto : BaseDto
     {
+        public string Name { get; set; }
     }
 }

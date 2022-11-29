@@ -4,6 +4,8 @@ using Ebebul.Core.UnitofWorks;
 using Ebebul.Repository;
 using Ebebul.Repository.Repositories;
 using Ebebul.Repository.UnitofWorks;
+using Ebebul.Service.Mapping;
+using Ebebul.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
 using System.Reflection;
@@ -19,7 +21,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUnitofWork, UnitofWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-//builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
+
+
 
 
 builder.Services.AddDbContext<AppDbContext>(x =>
