@@ -10,6 +10,8 @@ namespace Ebebul.Core.Entity
     {
         public int Id { get; set; } 
         public DateTime CreatDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+
+        //? Nullable anlamına gelir.
+        public DateTime? UpdateDate { get; set; }
     }
 }

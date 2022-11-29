@@ -25,7 +25,7 @@ namespace Ebebul.Core.Models
         public string Birthplace { get; set; }
         public int Length { get; set; }
         public int Weight { get; set; }
-        public string MyLocation { get; set; }
+        public string Location { get; set; }
         public string Password { get; set; }
         public int CategoryId { get; set; }
 
@@ -33,8 +33,5 @@ namespace Ebebul.Core.Models
         //Bir tane categorysi olduğunu belli ederiz.
         public Category Category { get; set; }
 
-
-
-        
     }
 }
