@@ -51,7 +51,7 @@ namespace Ebebul.Service.Services
             return await _repository.GetByIdAsync(id);
         }
 
-        public async void RemoveAsync(T entity)
+        public async Task RemoveAsync(T entity)
         {
             _repository.Remove(entity);
             await _unitofwork.CommitAsync();

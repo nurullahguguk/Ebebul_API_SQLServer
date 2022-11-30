@@ -25,7 +25,7 @@ namespace Ebebul.Core.Services
         //Update ve Remove u niye asenkron yaptık veritabanına değişikliklerin yansıması için SaveChangeAsync kullanacağımız için asenkron tanımladık.
 
         Task UpdateAsync(T entity);
-        void RemoveAsync(T entity);
+        Task RemoveAsync(T entity);
         Task RemoveRangeAsync(IEnumerable<T> entities);
 
     }
