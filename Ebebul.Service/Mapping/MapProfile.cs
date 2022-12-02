@@ -19,6 +19,7 @@ namespace Ebebul.Service.Mapping
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<User, UserWithCategoryDto>();
         }
 
     }
