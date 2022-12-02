@@ -32,6 +32,5 @@ namespace Ebebul.Core.Models
         //[ForeignKey("CategoryId")] EF Core direkt görüyor eğer görmeseydi Attribute tanımlayacaktık.
         //Bir tane categorysi olduğunu belli ederiz.
         public Category Category { get; set; }
-
     }
 }

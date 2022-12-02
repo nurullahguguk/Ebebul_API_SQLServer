@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ebebul.API.Controllers
 {
-    
     public class CustomBaseController : ControllerBase
     {
         [NonAction]
