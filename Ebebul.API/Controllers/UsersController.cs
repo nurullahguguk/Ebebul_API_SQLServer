@@ -7,19 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ebebul.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class UsersController : CustomBaseController
     {
-        private readonly IMapper _mapper;
-        private readonly IService<User> _service;
-        private readonly IUserService _userService;
+        private readonly IMapper _mapper;     
+        private readonly IUserService _service;
 
         public UsersController(IMapper mapper, IService<User> service, IUserService userService = null)
         {
             _mapper = mapper;
-            _service = service;
-            _userService = userService;
+            _service = userService;
         }
 
         /// GET api/users
@@ -45,7 +42,7 @@ namespace Ebebul.API.Controllers
         [HttpGet("[action]")] //GetUsersWithGategory method ismini otomotik alır.
         public async Task<IActionResult> GetUsersWithGategory()
         {
-            return CreateActionResult(await _userService.GetUsersWithCategory());
+            return CreateActionResult(await _service.GetUsersWithCategory());
         }
         //
         [HttpPost]
