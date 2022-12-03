@@ -1,6 +1,8 @@
 ﻿using Ebebul.Core.Repositories;
 using Ebebul.Core.Services;
 using Ebebul.Core.UnitofWorks;
+using Ebebul.Service.Exceptions;
+using Ebebul.Service.Exeptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,7 +50,13 @@ namespace Ebebul.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var hasUser =  await _repository.GetByIdAsync(id);
+
+            if(hasUser==null)
+            {
+                throw new NotFoundException($"{typeof(T).Name} ({id}) not found");
+            }
+            return hasUser;
         }
 
         public async Task RemoveAsync(T entity)
