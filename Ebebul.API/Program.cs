@@ -1,5 +1,8 @@
-﻿using Ebebul.API.Filters;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Ebebul.API.Filters;
 using Ebebul.API.Middlewares;
+using Ebebul.API.Modules;
 using Ebebul.Core.Repositories;
 using Ebebul.Core.Services;
 using Ebebul.Core.UnitofWorks;
@@ -25,24 +28,12 @@ x.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>());
 //Kendi filterimizi frameforkun filterini baskıladık.
 builder.Services.Configure<ApiBehaviorOptions>(options=> options.SuppressModelStateInvalidFilter =true);
 
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
-
-builder.Services.AddScoped<IUnitofWork, UnitofWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -54,6 +45,10 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     });
 });
 
+builder.Host.UseServiceProviderFactory
+    (new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerbuilder => containerbuilder.RegisterModule(new RepoServiceModule()));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -62,8 +57,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
 
 app.UseHttpsRedirection();
 
