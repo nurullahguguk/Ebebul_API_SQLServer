@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ebebul.API.Filters;
 using Ebebul.Core.DTOs;
 using Ebebul.Core.Models;
 using Ebebul.Core.Services;
@@ -28,6 +29,8 @@ namespace Ebebul.API.Controllers
             return CreateActionResult(CustomResponseDto<List<UserDto>>.Success(200, usersDtos));
         }
 
+        
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
         /// GET api/users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
