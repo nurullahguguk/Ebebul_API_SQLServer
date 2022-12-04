@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ebebul.Service\Ebebul.Service.csproj" />
+  </ItemGroup>
+
 </Project>

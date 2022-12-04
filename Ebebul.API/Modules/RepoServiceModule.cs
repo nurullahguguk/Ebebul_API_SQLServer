@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Ebebul.Caching;
 using Ebebul.Core.Repositories;
 using Ebebul.Core.Services;
 using Ebebul.Core.UnitofWorks;
@@ -41,7 +42,12 @@ namespace Ebebul.API.Modules
             //builder.Services.AddScoped<IUserService, UserService>();
             builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly).Where(x => x.Name.EndsWith
             ("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();
-               
+            //  UserService'i cahsiz olduğu için eklenmemesi için ismini UserServiceWithNoCaching olarak değiştirdim.
+            //UserServiceWithCaching'i ise manuel olarak ekliyorum.
+            builder.RegisterType<UserServiceWithCaching>().As<IUserService>();
+            //IUserService'ı gördüğünde UserServiceWithCaching'i al.
+
+
         }
     }
 }

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ebebul.Service\Ebebul.Service.csproj" />
+    <ProjectReference Include="..\Ebebul.Caching\Ebebul.Caching.csproj" />
   </ItemGroup>
 
 </Project>

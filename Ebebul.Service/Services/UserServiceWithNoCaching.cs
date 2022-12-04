@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Ebebul.Service.Services
 {
-    public class UserService : Service<User>, IUserService
+    public class UserServiceWithNoCaching : Service<User>, IUserService
     {
         private readonly IUserRepository _userRepository;   
         private readonly IMapper _mapper;
-        public UserService(IGenericRepository<User> repository, IUnitofWork unitofwork, IUserRepository 
+        public UserServiceWithNoCaching(IGenericRepository<User> repository, IUnitofWork unitofwork, IUserRepository 
             userRepository, IMapper mapper) : base(repository, unitofwork)
         {
             _userRepository = userRepository;

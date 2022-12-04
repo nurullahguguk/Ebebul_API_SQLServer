@@ -14,7 +14,7 @@ namespace Ebebul.API.Controllers
         private readonly IMapper _mapper;     
         private readonly IUserService _service;
 
-        public UsersController(IMapper mapper, IService<User> service, IUserService userService = null)
+        public UsersController(IMapper mapper, IUserService userService = null)
         {
             _mapper = mapper;
             _service = userService;
