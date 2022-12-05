@@ -21,8 +21,12 @@ namespace Ebebul.API.Modules
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerLifetimeScope();
 
+            builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
+
             // builder.Services.AddScoped<IUnitofWork, UnitofWork>(); => Program.cs
-            builder.RegisterType<UnitofWork>().As<IUnitofWork>();
+            builder.RegisterType<UnitofWork>().As<IUnitofWork>().InstancePerLifetimeScope();
+
+            builder.RegisterType<UserServiceWithDto>().As<IUserServiceWithDto>().InstancePerLifetimeScope();
 
             var apiAssembly =Assembly.GetExecutingAssembly();
             var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext));

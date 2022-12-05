@@ -21,6 +21,8 @@ namespace Ebebul.Service.Mapping
             CreateMap<UserUpdateDto, User>();
             CreateMap<User, UserWithCategoryDto>();
             CreateMap<Category, CategoryWithUsersDto>();
+            CreateMap<UserCreateDto, User>();
+
         }
 
     }

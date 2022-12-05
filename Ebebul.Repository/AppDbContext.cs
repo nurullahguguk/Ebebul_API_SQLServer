@@ -1,4 +1,5 @@
-﻿using Ebebul.Core.Models;
+﻿using Ebebul.Core.Entity;
+using Ebebul.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ebebul.Repository
@@ -36,6 +38,42 @@ namespace Ebebul.Repository
 
         }
 
+        public override int SaveChanges()
+        {
+            UpdateChangeTracker();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateChangeTracker();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+        
+        public void UpdateChangeTracker()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityReference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                Entry(entityReference).Property(x => x.UpdateDate).IsModified = false;
+                                entityReference.CreatDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(entityReference).Property(x => x.CreatDate).IsModified = false;
+                                entityReference.UpdateDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
+        }
 
     }
 }
